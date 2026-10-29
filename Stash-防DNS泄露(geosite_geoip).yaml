@@ -1,0 +1,289 @@
+proxy-providers:
+  订阅链接: #  “订阅链接”  此字段可以修改不影响适用
+    url: 输入订阅地址
+    path: ./providers/stashdns.yaml
+    interval: 864000000
+    filter: "^(?!.*流量)(?!.*套餐)(?!.*到期)(?!.*剩余)(?!.*重置)(?!.*官网)(?!.*网站)(?!.*最新网址)(?!.*防失联)(?!.*失联)(?!.*官网地址)(?!.*公告)(?!.*通知)(?!.*电报)(?!.*群)(?!.*频道)(?!.*说明)(?!.*使用说明)(?!.*QQ群)(?!.*客服)(?!.*工单)(?!.*订阅)(?!.*Expire)(?!.*Traffic)(?!.*Reset)(?!.*Remaining)(?!.*Official)(?!.*Website)(?!.*失败)(?!.*导航)(?!.*备用).*$"
+##############################################################################################################################################
+
+port: 7890
+socks-port: 7891
+allow-lan: true
+external-controller: :9090
+dns:
+  enable: true
+  prefer-h3: true
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  fallback:
+    - https://dns.google/dns-query
+    - https://dns.cloudflare.com/dns-query
+  fake-ip-filter: ["*.n.n.srv.nintendo.net", +.stun.playstation.net, xbox.*.*.microsoft.com, "*.msftncsi.com", "*.msftconnecttest.com", WORKGROUP, "*.lan", stun.*.*, stun.*.*.*, +.stun.*.*, +.stun.*.*.*, +.stun.*.*.*.*, +.stun.*.*.*.*.*, time.windows.com, time.nist.gov, time.apple.com, time.asia.apple.com, "*.ntp.org.cn", "*.openwrt.pool.ntp.org", time1.cloud.tencent.com, time.ustc.edu.cn, pool.ntp.org, ntp.ubuntu.com, "*.*.xboxlive.com", speedtest.cros.wr.pvp.net]
+proxy-groups:
+  # 功能分组
+  - name: 自动选择
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Auto.png
+    interval: 120
+    lazy: true
+    tolerance: 50
+    type: select
+    include-all: true
+  - name: 手动选择
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Static.png
+    interval: 120
+    lazy: true
+    type: select
+    include-all: true
+  - name: 选择代理
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Proxy.png
+    type: select
+    proxies:
+      - 自动选择
+      - 手动选择
+      - US 美国
+      - SG 新加坡
+      - JP 日本
+      - HK 香港
+      - TW 台湾
+      - DIRECT
+  - name: 默认
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Final.png
+    type: select
+    proxies:
+      - 选择代理
+      - DIRECT
+  - icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_2.png
+    name: TikTok
+    proxies:
+      - TW 台湾
+      - HK 香港
+      - SG 新加坡
+      - JP 日本
+      - US 美国
+    type: select
+  - name: 国外媒体
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/YouTube.png
+    type: select
+    proxies:
+      - 自动选择
+      - 手动选择
+      - US 美国
+      - SG 新加坡
+      - JP 日本
+      - HK 香港
+      - TW 台湾
+      - DIRECT
+  - name: 🟨 USBank
+    type: select
+    proxies:
+      - 自动选择
+      - 手动选择
+      - US 美国
+      - SG 新加坡
+      - JP 日本
+      - HK 香港
+      - TW 台湾
+      - DIRECT
+  - name: 🧠 AI
+    type: select
+    proxies:
+      - US 美国
+      - 自动选择
+      - 手动选择
+      - HK 香港
+      - SG 新加坡
+      - JP 日本
+      - TW 台湾
+      - DIRECT
+  - name: Speedtest
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Speedtest.png
+    type: select
+    proxies:
+      - 自动选择
+      - 手动选择
+      - US 美国
+      - SG 新加坡
+      - JP 日本
+      - HK 香港
+      - TW 台湾
+      - DIRECT
+  - name: HK 香港
+    filter: "澳门|🇲🇴|港|🇭🇰|HK|(?i)Hong"
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png
+    interval: 120
+    lazy: true
+    tolerance: 50
+    type: select
+    include-all: true
+  - name: TW 台湾
+    filter: "台|🇹🇼|湾|TW|(?i)Taiwan"
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Taiwan.png
+    interval: 120
+    lazy: true
+    tolerance: 50
+    type: select
+    include-all: true
+  - name: JP 日本
+    filter: "日|🇯🇵|东京|JP|(?i)Japan"
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Japan.png
+    interval: 120
+    lazy: true
+    tolerance: 50
+    type: select
+    include-all: true
+  - name: SG 新加坡
+    filter: "新加坡|坡|狮城|🇸🇬|SG|(?i)Singapore"
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Singapore.png
+    interval: 120
+    lazy: true
+    tolerance: 50
+    type: select
+    include-all: true
+  # 基于地区分组
+  - name: US 美国
+    filter: "美|🇺🇲|US|(?i)States|America"
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_States.png
+    interval: 120
+    lazy: true
+    tolerance: 50
+    type: select
+    include-all: true
+rule-providers:
+  Custom_Direct_Domain:
+    behavior: domain
+    format: yaml
+    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Domain.yaml
+    interval: 28800
+  Custom_Direct_Classical_IP:
+    behavior: classical
+    format: yaml
+    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Classical_IP.yaml
+    interval: 28800
+  Custom_Proxy_Domain:
+    behavior: domain
+    format: yaml
+    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Domain.yaml
+    interval: 28800
+  BankUS_Domain:
+    behavior: domain
+    format: yaml
+    url: https://raw.githubusercontent.com/heimian0722-hash/clashrule/main/BankUS_Domain.yaml
+    interval: 28800
+  VirtualFinance:
+    behavior: domain
+    format: yaml
+    url: https://raw.githubusercontent.com/heimian0722-hash/clashrule/main/VirtualFinance.yaml
+    interval: 28800
+  TikTok:
+    behavior: domain
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/tiktok.yaml
+  applecn_domain:
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/apple%40cn.yaml"
+    interval: 86400
+    behavior: domain
+    format: yaml
+  apple_domain:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/apple.yaml
+    interval: 86400
+    behavior: domain
+    format: yaml
+  apple_ip:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo-lite/geoip/apple.yaml
+    interval: 86400
+    behavior: ipcidr
+    format: yaml
+  google_cn:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/google-cn.yaml
+    behavior: domain
+    interval: 86400
+    format: yaml
+  paypal:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/paypal.yaml
+    interval: 86400
+    behavior: domain
+    format: yaml
+  gfw:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/gfw.yaml
+    interval: 86400
+    behavior: domain
+    format: yaml
+rules:
+  - RULE-SET,apple_domain,DIRECT
+  - RULE-SET,applecn_domain,DIRECT
+  - RULE-SET,TikTok,TikTok
+  - PROTOCOL,quic,REJECT-DROP
+  - GEOSITE,private,DIRECT
+  - GEOIP,private,DIRECT,no-resolve
+  - RULE-SET,Custom_Direct_Domain,DIRECT
+  - RULE-SET,Custom_Direct_Classical_IP,DIRECT
+  - RULE-SET,Custom_Proxy_Domain,选择代理
+  - GEOSITE,cn,DIRECT
+  - GEOIP,cn,DIRECT,no-resolve
+  - RULE-SET,google_cn,DIRECT
+  - GEOSITE,category-games@cn,DIRECT
+  - GEOSITE,category-game-platforms-download,DIRECT
+  - GEOSITE,category-public-tracker,DIRECT
+  # app
+  - GEOSITE,openai,🧠 AI
+  - GEOSITE,category-ai-!cn,🧠 AI
+  - GEOSITE,paypal,🟨 USBank
+  - RULE-SET,paypal,🟨 USBank
+  - RULE-SET,BankUS_Domain,🟨 USBank
+  - RULE-SET,VirtualFinance,🟨 USBank
+  - GEOSITE,OKX,🟨 USBank
+  - GEOSITE,Binance,🟨 USBank
+  - GEOSITE,Bybit,🟨 USBank
+  - GEOSITE,cloudflare,选择代理
+  - GEOIP,cloudflare,选择代理,no-resolve
+  - GEOSITE,category-communication,选择代理
+  - GEOSITE,category-social-media-!cn,选择代理
+  # YouTube
+  - GEOSITE,youtube,国外媒体
+  # Netflix
+  - GEOSITE,netflix,国外媒体
+  # Disney+
+  - GEOSITE,disney,国外媒体
+  # Spotify
+  - GEOSITE,spotify,国外媒体
+  # Speedtest
+  - GEOSITE,speedtest,Speedtest
+  # GitHub
+  - GEOSITE,github,选择代理
+  - GEOIP,github,选择代理,no-resolve
+  # Telegram
+  - GEOSITE,telegram,选择代理
+  - GEOIP,telegram,选择代理,no-resolve
+  # Google
+  - GEOSITE,google,选择代理
+  - GEOIP,google,选择代理,no-resolve
+  # Twitter
+  - GEOSITE,twitter,国外媒体
+  - DOMAIN-SUFFIX,tapbots.com,国外媒体
+  # Instagram
+  - GEOSITE,instagram,国外媒体
+  # Facebook
+  - GEOSITE,facebook,国外媒体
+  # Steam
+  - GEOSITE,steam,选择代理
+  # Apple LBS
+  - DOMAIN-SUFFIX,iphone-ld.apple.com,DIRECT
+  - DOMAIN-SUFFIX,lcdn-locator.apple.com,DIRECT
+  - DOMAIN-SUFFIX,lcdn-registration.apple.com,DIRECT
+  - DOMAIN-SUFFIX,push.apple.com,DIRECT
+  # Apple OCSP
+  - PROCESS-NAME,trustd,选择代理
+  # Microsoft
+  - GEOSITE,microsoft@cn,DIRECT
+  - GEOSITE,microsoft,选择代理
+  - GEOIP,microsoft,选择代理,no-resolve
+  - GEOSITE,xbox,选择代理
+  - RULE-SET,gfw,选择代理
+  - MATCH,默认
+mode: Rule
+log-level: warning
