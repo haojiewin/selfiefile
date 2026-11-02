@@ -164,7 +164,6 @@ proxy-groups:
   icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Final.png
   proxies:
   - 🌎 Global-Auto
-  - 🗺️ EUR-Manual
   - 🇺🇸 US-Auto
   - 🇸🇬 SG-Auto
   - 🇭🇰 HK-Auto
