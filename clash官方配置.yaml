@@ -425,7 +425,7 @@ proxy-groups:
 - name: APNs-Fallback
   type: fallback
   include-all: true
-  exclude-filter: (?i)^(Apple Push|APNs-Fallback)$
+  exclude-filter: (?i)^(Apple Push|APNs-Fallback)$|.*(官网|套餐|流量|剩余|Traffic|Expire|ExpireDate|到期|过期|订阅).*
   icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Apple.png
   url: http://captive.apple.com/hotspot-detect.html
   interval: 300
