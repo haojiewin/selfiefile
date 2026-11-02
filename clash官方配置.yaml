@@ -171,14 +171,6 @@ proxy-groups:
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
   - DIRECT
-- name: Apple Push
-  type: fallback
-  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Apple.png
-  proxies:
-  - APNs-Fallback
-  - DIRECT
-  url: http://captive.apple.com/hotspot-detect.html
-  interval: 300
 - name: 🌎 Global-Auto
   type: url-test
   include-all: true
@@ -187,14 +179,6 @@ proxy-groups:
   url: http://www.gstatic.com/generate_204
   interval: 600
   tolerance: 50
-- name: 🗺️ EUR-Manual
-  type: select
-  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Europe_Map.png
-  proxies:
-  - 🇬🇧 UK-Auto
-  - 🇩🇪 DE-Auto
-  - 🇫🇷 FR-Auto
-  - 🇷🇺 RU-Auto
 - name: YouTube
   type: select
   icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/YouTube.png
@@ -204,7 +188,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: Netflix
@@ -216,7 +199,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: Disney+
@@ -228,7 +210,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: Spotify
@@ -240,7 +221,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: TikTok
@@ -252,7 +232,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: Twitch
@@ -264,7 +243,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: GPT
@@ -276,7 +254,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: Gemini
@@ -288,7 +265,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: Claude
@@ -300,7 +276,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: Copilot
@@ -312,7 +287,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: Grok
@@ -324,7 +298,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: Google
@@ -336,7 +309,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: X
@@ -348,7 +320,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: Facebook
@@ -360,7 +331,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: Instagram
@@ -372,7 +342,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: WhatsApp
@@ -384,7 +353,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: Telegram
@@ -396,7 +364,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: Github
@@ -408,7 +375,6 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
 - name: Speedtest
@@ -420,17 +386,9 @@ proxy-groups:
   - 🇭🇰 HK-Auto
   - 🇯🇵 JP-Auto
   - 🇹🇼 TW-Auto
-  - 🗺️ EUR-Manual
   - PROXY-Gate
   - DIRECT
-- name: APNs-Fallback
-  type: fallback
-  include-all: true
-  exclude-filter: (?i)^(Apple Push|APNs-Fallback)$|.*(官网|套餐|流量|剩余|Traffic|Expire|ExpireDate|到期|过期|订阅).*
-  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Apple.png
-  url: http://captive.apple.com/hotspot-detect.html
-  interval: 300
-
+  
 - name: 🇺🇸 US-Auto
   type: url-test
   include-all: true
@@ -471,40 +429,6 @@ proxy-groups:
   url: http://www.gstatic.com/generate_204
   interval: 600
   tolerance: 50
-- name: 🇬🇧 UK-Auto
-  type: url-test
-  include-all: true
-  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/United_Kingdom.png
-  filter: (?i)(\[UK\]|^UK$|UK|United Kingdom|Britain|\bUK\b|英国|伦敦)
-  url: http://www.gstatic.com/generate_204
-  interval: 600
-  tolerance: 50
-- name: 🇩🇪 DE-Auto
-  type: url-test
-  include-all: true
-  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Germany.png
-  filter: (?i)(\[DE\]|^DE$|Germany|Deutschland|\bDE\b|德国|法兰克福)
-  url: http://www.gstatic.com/generate_204
-  interval: 600
-  tolerance: 50
-- name: 🇫🇷 FR-Auto
-  type: url-test
-  include-all: true
-  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/France.png
-  filter: (?i)(\[FR\]|^FR$|France|\bFR\b|法国|巴黎)
-  url: http://www.gstatic.com/generate_204
-  interval: 600
-  tolerance: 50
-- name: 🇷🇺 RU-Auto
-  type: url-test
-  include-all: true
-  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Russia.png
-  filter: (?i)(\[RU\]|^RU$|Russia|Russian Federation|\bRU\b|俄罗斯|莫斯科|伯力)
-  url: http://www.gstatic.com/generate_204
-  interval: 600
-  tolerance: 50
-
-
 rules:
 - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
 - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
