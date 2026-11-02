@@ -14,7 +14,6 @@ proxy-providers:
     exclude-filter: "官网|剩余|流量|套餐|订阅|直连|到期时间|Expire|Traffic|ExpireDate"
     proxy: 直连
 
-
 proxies:
   - {name: 直连, type: direct, udp: true}
 
