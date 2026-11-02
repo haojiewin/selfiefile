@@ -58,6 +58,7 @@ proxy-providers:
     type: http
     url: "" # 在英文双引号内粘贴你的机场订阅链接
     interval: 600
+    exclude-filter: (?i).*(官网|套餐|流量|剩余|Traffic|Expire|ExpireDate|到期|过期|订阅).*
 
 mixed-port: 7890
 allow-lan: false
