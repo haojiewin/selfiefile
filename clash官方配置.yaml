@@ -435,21 +435,7 @@ rules:
 - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
 - GEOIP,LAN,DIRECT,no-resolve
 
-- DOMAIN-SUFFIX,push.apple.com,Apple Push
-- DOMAIN-SUFFIX,push-apple.com.akadns.net,Apple Push
-- DOMAIN-KEYWORD,apple.com.edgekey.net,Apple Push
-- IP-CIDR,17.249.0.0/16,Apple Push,no-resolve
-- IP-CIDR,17.252.0.0/16,Apple Push,no-resolve
-- IP-CIDR,17.57.144.0/22,Apple Push,no-resolve
-- IP-CIDR,17.188.128.0/18,Apple Push,no-resolve
-- IP-CIDR,17.188.20.0/23,Apple Push,no-resolve
-- IP-CIDR6,2620:149:a44::/48,Apple Push,no-resolve
-- IP-CIDR6,2403:300:a42::/48,Apple Push,no-resolve
-- IP-CIDR6,2403:300:a51::/48,Apple Push,no-resolve
-- IP-CIDR6,2a01:b740:a42::/48,Apple Push,no-resolve
 
-- RULE-SET,Apple,DIRECT
-- RULE-SET,Apple_Domain,DIRECT
 - RULE-SET,AdvertisingLite,REJECT
 - RULE-SET,AdvertisingLite_Domain,REJECT
 - RULE-SET,Privacy,REJECT
@@ -697,18 +683,6 @@ rules:
 - GEOIP,CN,DIRECT,no-resolve
 - MATCH,PROXY-Gate
 rule-providers:
-  Apple:
-    type: http
-    behavior: classical
-    format: yaml
-    interval: 86400
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple.yaml
-  Apple_Domain:
-    type: http
-    behavior: domain
-    format: mrs
-    interval: 86400
-    url: https://raw.githubusercontent.com/Sydney-Moses/Network-Profiles/refs/heads/main/MRS/Apple_Domain.mrs
   AdvertisingLite:
     type: http
     behavior: classical
