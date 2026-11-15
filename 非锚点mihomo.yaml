@@ -116,12 +116,7 @@ dns:
   nameserver:
     - https://dns.google/dns-query
     - https://dns.cloudflare.com/dns-query 
-  fallback:
-    - https://dns.google/dns-query
-    - https://dns.cloudflare.com/dns-query 
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
+
   fake-ip-filter:
     - rule-set:fakeipfilter_cn
     - rule-set:fakeipfilter_!cn
