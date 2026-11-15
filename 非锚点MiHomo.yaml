@@ -108,6 +108,10 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
   nameserver-policy:
+  # 自定义网址走国内还是国外dns！！！
+    "rule-set:dns_cn_custom":
+    - https://dns.alidns.com/dns-query#disable-qtype-65=true
+    - https://doh.pub/dns-query#disable-qtype-65=true
     "rule-set:cn_domain":
     - https://dns.alidns.com/dns-query#disable-qtype-65=true
     - https://doh.pub/dns-query#disable-qtype-65=true
@@ -218,3 +222,5 @@ rule-providers:
   netflix_ip: {type: http, interval: 86400, behavior: ipcidr, format: mrs, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/netflix.mrs"}
   cn_ip: {type: http, interval: 86400, behavior: ipcidr, format: mrs, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   private_ip: {type: http, interval: 86400, behavior: ipcidr, format: mrs, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/private.mrs"}
+  dns_cn_custom: {type: inline, behavior: domain, payload: ["+.example-a.com", "+.example-b.com"]}
+ # 上面一个填入网址，设定走国内还是国外dns！！！ 
