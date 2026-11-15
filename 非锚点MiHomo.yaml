@@ -13,13 +13,13 @@ proxy-providers:
     filter: '^(?!.*(官网|剩余|流量|套餐|订阅|直连|到期时间|Expire|Traffic|ExpireDate)).*$'
     proxy: 直连
     url: "订阅URL"
-
 proxies: 
   - name: "直连"
     type: direct
     udp: true
     benchmark-url: http://connect.rom.miui.com/generate_204
     benchmark-timeout: 5
+
 mixed-port: 7890
 authentication:
 - "user:passwd"
@@ -87,7 +87,6 @@ dns:
   fake-ip-filter-mode: blacklist
   default-nameserver:
     - https://223.5.5.5/dns-query
-    - https://119.29.29.29/dns-query    
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
@@ -119,7 +118,11 @@ dns:
   nameserver:
     - https://dns.google/dns-query
     - https://dns.cloudflare.com/dns-query 
-
+  fallback:
+    - https://8.8.8.8/dns-query#默认代理
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
   fake-ip-filter:
     - rule-set:fakeipfilter_cn
     - rule-set:fakeipfilter_!cn
