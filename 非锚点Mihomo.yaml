@@ -14,9 +14,12 @@ proxy-providers:
     proxy: 直连
     url: "订阅URL"
 
-proxies:
-  - {name: 直连, type: direct, udp: true}
-
+proxies: 
+  - name: "直连"
+    type: direct
+    udp: true
+    benchmark-url: http://connect.rom.miui.com/generate_204
+    benchmark-timeout: 5
 mixed-port: 7890
 authentication:
 - "user:passwd"
