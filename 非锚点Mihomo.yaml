@@ -3,11 +3,23 @@
 # 因为DNS流程较多，尽可能用本地搭建DNS开启乐观缓存。
 # 因为配置里开启了绕过大陆，google商店会无法更新，可以尝试把 "+.googleapis.cn"  "+.xn--ngstr-lra8j.com" 两个域名后缀指定走国外DNS，同时rules里添加走代理，理论上可以解决，或者关闭绕过大陆。
 proxy-providers:
-  HH: {type: http, interval: 0, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}, filter: '^(?!.*(官网|剩余|流量|套餐|订阅|直连|到期时间|Expire|Traffic|ExpireDate)).*$', proxy: 直连, url: "订阅URL"}
+  HH:
+    type: http
+    interval: 0
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    filter: '^(?!.*(官网|剩余|流量|套餐|订阅|直连|到期时间|Expire|Traffic|ExpireDate)).*$'
+    proxy: 直连
+    url: "订阅URL"
 
-proxies:
-  - {name: 直连, type: direct, udp: true}
-
+proxies: 
+  - name: "直连"
+    type: direct
+    udp: true
+    benchmark-url: http://connect.rom.miui.com/generate_204
+    benchmark-timeout: 5
 mixed-port: 7890
 authentication:
 - "user:passwd"
@@ -69,31 +81,14 @@ dns:
   enable: true
   cache-algorithm: arc
   ipv6: false
+  prefer-h3: false # 是否开启 DoH 支持 HTTP/3，将并发尝试
+  respect-rules: true
   enhanced-mode: fake-ip
   fake-ip-ttl: 1
   fake-ip-range: 198.18.0.0/16
   fake-ip-filter-mode: blacklist
-  default-nameserver:
-    - https://223.5.5.5/dns-query
-  proxy-server-nameserver:
-    - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
-  direct-nameserver:
-    - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
-  nameserver-policy:
-    "rule-set:cn_domain,private_domain,fakeipfilter_cn,steamcn_domain,microsoftcn_domain,applecn_domain":
-    - https://dns.alidns.com/dns-query#disable-qtype-65=true
-    - https://doh.pub/dns-query#disable-qtype-65=true
-    "rule-set:fakeipfilter_!cn":
-    - https://8.8.8.8/dns-query#默认代理&disable-qtype-65=true
-  nameserver:
-    - https://8.8.8.8/dns-query#默认代理&ecs=223.5.5.0/24
-  fallback:
-    - https://8.8.8.8/dns-query#默认代理
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
+  # 模式切换 whitelist/blacklist 
+  # 黑名单模式表示如果匹配成功则不返回 Fake-IP, 白名单模式时只有匹配成功才返回 Fake-IP
   fake-ip-filter:
     - rule-set:fakeipfilter_cn
     - rule-set:fakeipfilter_!cn
@@ -103,7 +98,40 @@ dns:
     - rule-set:applecn_domain
     - rule-set:steamcn_domain
 
-
+  default-nameserver:
+    - https://223.5.5.5/dns-query
+    - https://119.29.29.29/dns-query    
+  proxy-server-nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  direct-nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  nameserver-policy:
+    "rule-set:cn_domain":
+    - https://dns.alidns.com/dns-query#disable-qtype-65=true
+    - https://doh.pub/dns-query#disable-qtype-65=true
+    "rule-set:private_domain":
+    - https://dns.alidns.com/dns-query#disable-qtype-65=true
+    - https://doh.pub/dns-query#disable-qtype-65=true
+    "rule-set:fakeipfilter_cn":
+    - https://dns.alidns.com/dns-query#disable-qtype-65=true
+    - https://doh.pub/dns-query#disable-qtype-65=true
+    "rule-set:steamcn_domain":
+    - https://dns.alidns.com/dns-query#disable-qtype-65=true
+    - https://doh.pub/dns-query#disable-qtype-65=true
+    "rule-set:microsoftcn_domain":
+    - https://dns.alidns.com/dns-query#disable-qtype-65=true
+    - https://doh.pub/dns-query#disable-qtype-65=true
+    "rule-set:applecn_domain":
+    - https://dns.alidns.com/dns-query#disable-qtype-65=true
+    - https://doh.pub/dns-query#disable-qtype-65=true
+    "rule-set:fakeipfilter_!cn":
+    - https://dns.google/dns-query
+    - https://dns.cloudflare.com/dns-query   
+  nameserver:
+    - https://dns.google/dns-query
+    - https://dns.cloudflare.com/dns-query 
 proxy-groups:
   - {name: 默认代理, type: select, proxies: [全部自动, 全部手动, 香港故转, 日本故转, 台湾故转, 狮城故转, 美国故转, 直连], icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/select.png"}
   - {name: AI, type: select, proxies: [美国故转, 香港故转, 日本故转, 台湾故转, 狮城故转, 全部自动, 全部手动, 直连], icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/ai.png"}
@@ -119,7 +147,6 @@ proxy-groups:
   - {name: OneDrive, type: select, proxies: [全部自动, 全部手动, 日本故转, 香港故转, 台湾故转, 狮城故转, 美国故转, 直连], icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/onedrive.png"}
   - {name: Apple, type: select, proxies: [全部自动, 全部手动, 香港故转, 日本故转, 台湾故转, 狮城故转, 美国故转, 直连], icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/apple.png"}
   - {name: 漏网之鱼, type: select, proxies: [默认代理, 香港故转, 日本故转, 台湾故转, 狮城故转, 美国故转, 全部自动, 全部手动, 直连], icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/final.png"}
-  - {name: 香港手动, type: select, include-all: true, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$", icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/flag/corner/hongkong.png"}
   - {name: 香港故转, type: fallback, include-all: true, interval: 300, lazy: true, url: 'https://www.gstatic.com/generate_204', filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$", icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/failover.png"}
   - {name: 日本故转, type: fallback, include-all: true, interval: 300, lazy: true, url: 'https://www.gstatic.com/generate_204', filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$", icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/failover.png"}
   - {name: 台湾故转, type: fallback, include-all: true, interval: 300, lazy: true, url: 'https://www.gstatic.com/generate_204', filter: "(?=.*(台|TW|(?i)Taiwan))^((?!(港|韩|新|美)).)*$", icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/failover.png"}
@@ -127,7 +154,7 @@ proxy-groups:
   - {name: 美国故转, type: fallback, include-all: true, interval: 300, lazy: true, url: 'https://www.gstatic.com/generate_204', filter: "(?=.*(美|US|(?i)States|America))^((?!(港|台|日|韩|新)).)*$", icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/failover.png"}
   - {name: 全部手动, type: select, include-all: true, filter: "^((?!(官网|剩余|流量|套餐|订阅|到期时间|直连|GB|Expire|Traffic|ExpireDate)).)*$", icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/all.png"}
   - {name: 全部自动, type: url-test, include-all: true, tolerance: 50, interval: 300, lazy: true, url: 'https://www.gstatic.com/generate_204', filter: "^((?!(官网|剩余|流量|套餐|订阅|到期时间|直连|GB|Expire|Traffic|ExpireDate)).)*$", icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/auto.png"}
-  - {name: 延迟辅助, type: url-test, proxies: [直连, DIRECT], interval: 3600, lazy: true, url: "http://connect.rom.miui.com/generate_204", icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/auto.png"}
+  - {name: 延迟辅助, type: url-test, proxies: [直连], interval: 3600, lazy: true, url: "http://connect.rom.miui.com/generate_204", icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/auto.png"}
   - {name: GLOBAL, type: select, proxies: [默认代理, 香港故转, 日本故转, 台湾故转, 狮城故转, 美国故转, 全部自动, 全部手动, 直连], icon: "https://raw.githubusercontent.com/s0lnce/mofish-icon/refs/heads/main/mihomo/pure/corner/all.png"}
 
 rules:
