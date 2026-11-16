@@ -82,7 +82,7 @@ dns:
   cache-algorithm: arc
   ipv6: false
   prefer-h3: false # 是否开启 DoH 支持 HTTP/3，将并发尝试
-  follow-rule: true
+  respect-rules: true
   enhanced-mode: fake-ip
   fake-ip-ttl: 1
   fake-ip-range: 198.18.0.0/16
@@ -112,22 +112,7 @@ dns:
     "rule-set:dns_cn_custom":
     - https://dns.alidns.com/dns-query#disable-qtype-65=true
     - https://doh.pub/dns-query#disable-qtype-65=true
-    "rule-set:cn_domain":
-    - https://dns.alidns.com/dns-query#disable-qtype-65=true
-    - https://doh.pub/dns-query#disable-qtype-65=true
-    "rule-set:private_domain":
-    - https://dns.alidns.com/dns-query#disable-qtype-65=true
-    - https://doh.pub/dns-query#disable-qtype-65=true
-    "rule-set:fakeipfilter_cn":
-    - https://dns.alidns.com/dns-query#disable-qtype-65=true
-    - https://doh.pub/dns-query#disable-qtype-65=true
-    "rule-set:steamcn_domain":
-    - https://dns.alidns.com/dns-query#disable-qtype-65=true
-    - https://doh.pub/dns-query#disable-qtype-65=true
-    "rule-set:microsoftcn_domain":
-    - https://dns.alidns.com/dns-query#disable-qtype-65=true
-    - https://doh.pub/dns-query#disable-qtype-65=true
-    "rule-set:applecn_domain":
+    "rule-set:cn_domain,private_domain,fakeipfilter_cn,steamcn_domain,microsoftcn_domain,applecn_domain":
     - https://dns.alidns.com/dns-query#disable-qtype-65=true
     - https://doh.pub/dns-query#disable-qtype-65=true
     "rule-set:fakeipfilter_!cn":
